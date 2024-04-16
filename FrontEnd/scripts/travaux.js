@@ -1,6 +1,6 @@
-export async function recupererTravaux() {
+export async function insererTravaux() {
     const reponse = await fetch("http://localhost:5678/api/works")
-    const travaux = await reponse.json().then((tab) => {
+    const tab = await reponse.json().then((tab) => {
         
         const galerie = document.querySelector(".gallery")
 

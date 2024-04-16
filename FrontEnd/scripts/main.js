@@ -1,4 +1,4 @@
-import { recupererTravaux } from "./travaux.js"
+import { insererTravaux } from "./travaux.js"
 
-recupererTravaux()
+insererTravaux()
 
