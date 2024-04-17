@@ -1,24 +1,25 @@
-export async function insererTravaux() {
+export async function recupererTravaux() {
     const reponse = await fetch("http://localhost:5678/api/works")
-    const tab = await reponse.json()
+    const tab = reponse.json()
 
+    return tab
+}
+
+export function insererTravaux(tableau) {
     const galerie = document.querySelector(".gallery")
 
-    for (let i = 0; i < tab.length; i++) {
+    for (let i = 0; i < tableau.length; i++) {
         galerie.innerHTML += `
             <figure>
-                <img src="${tab[i].imageUrl}" alt="${tab[i].title}">
-                <figcaption>${tab[i].title}</figcaption>
+                <img src="${tableau[i].imageUrl}" alt="${tableau[i].title}">
+                <figcaption>${tableau[i].title}</figcaption>
             </figure>`
         }
 }
 
-export async function insererFiltres() {
-    const reponse = await fetch("http://localhost:5678/api/works")
-    const tab = await reponse.json().then((tab) => {
-
+export function insererFiltres(tableau) {
         //Extraction des noms de catégories de tous les travaux
-        let categories = tab.map(tab => tab.category.name)
+        let categories = tableau.map(tab => tableau.category.name)
 
         //Tri des catégories puis suppression des catégories en doublon
         categories = categories.sort()
@@ -28,16 +29,17 @@ export async function insererFiltres() {
             }
         }
 
+        //Ajout du filtre "Tous"
+        categories.splice(0, 0, "Tous")
+
         //Insertion des boutons-filtres dans le code HTML
         const filtres = document.querySelector(".filtres")
 
-        categories.splice(0,0,"Tous")
 
         for (let i = 0; i < categories.length; i++) {
             filtres.innerHTML += `
-            <button onclick="selectionneBouton(this)">${categories[i]}</button>`
+            <button>${categories[i]}</button>`
         }
-    })
 }
 
 function selectionneBouton(bouton) {

@@ -1,6 +1,6 @@
-import { insererTravaux, insererFiltres } from "./travaux.js"
+import { recupererTravaux, insererTravaux, insererFiltres } from "./travaux.js"
 
-insererTravaux()
+recupererTravaux().then(test => insererTravaux(test))
 
 insererFiltres()
 
