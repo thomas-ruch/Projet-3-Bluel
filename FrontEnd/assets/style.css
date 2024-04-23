@@ -58,17 +58,16 @@ table {
 }
 
 /** end reset css**/
+
+
+/********** CSS général **********/ 
+
 body {
 	max-width: 1140px;
 	margin: auto;
 	font-family: 'Work Sans';
 	font-size: 14px;
-}
-
-header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0
+	background-color: #fefef9;
 }
 
 section {
@@ -88,7 +87,6 @@ h1>span {
 	font-family: 'Work Sans';
 	font-size: 10px;
 	letter-spacing: 0.1em;
-	;
 }
 
 h2 {
@@ -98,11 +96,36 @@ h2 {
 	color: #1D6154
 }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+}
+
+a span {
+	font-weight: 600;
+}
+
+.invisible {
+	display: none;
+}
+
+
+/********** Header et Navigation **********/ 
+
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 
 nav li {
@@ -113,6 +136,9 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+
+/********** Sections index.html et login.html **********/ 
 
 #introduction {
 	display: flex;
@@ -168,10 +194,6 @@ li:hover {
 	color: white;
 }
 
-.invisible {
-	display: none;
-}
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -189,29 +211,45 @@ li:hover {
 	margin: auto;
 }
 
-#contact>* {
+#login {
+	width: 40%;
+	margin: auto;
+	height: 800px;
+}
+
+#contact>*,
+#login>* {
 	text-align: center;
 }
 
-#contact h2 {
+#login a {
+	display: block;
+	text-decoration: underline solid;
+}
+
+#contact h2,
+#login h2 {
 	margin-bottom: 20px;
 }
 
-#contact form {
+#contact form,
+#login form {
 	text-align: left;
 	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input,
+#login input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact label {
+#contact label,
+#login label {
 	margin: 2em 0 1em 0;
 }
 
@@ -230,6 +268,9 @@ input[type="submit"] {
 	text-align: center;
 	border-radius: 60px;
 }
+
+
+/********** Footer **********/
 
 footer nav ul {
 	display: flex;
