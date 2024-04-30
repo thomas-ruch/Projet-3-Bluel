@@ -116,10 +116,17 @@ a span {
 
 /********** Header et Navigation **********/ 
 
-header {
+header div:nth-child(1) {
+	text-align: center;
+	background-color: black;
+	color: white;
+	padding: 15px;
+}
+
+header div:nth-child(2) {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 nav ul {
@@ -170,6 +177,18 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+
+#portfolio .titre {
+	margin: auto;
+	width: 30%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.titre button {
+	width: 30%;
+	outline: none;
 }
 
 .filtres {

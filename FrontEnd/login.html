@@ -11,37 +11,44 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="#" type="module" defer></script>
+	<script src="scripts/login.js" type="module" defer></script>
 </head>
 
 <body>
 	<header>
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li><a href="index.html">projets</a></li>
-				<li><a href="#">contact</a></li>
-				<li><a href="login.html"><span>login</span></a></li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav>
+		<div class="invisible">
+			<i class="fa-solid fa-pen-to-square"></i>
+			Mode édition
+		</div>
+		<div>
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li><a href="index.html">projets</a></li>
+					<li><a href="#">contact</a></li>
+					<li><a href="login.html"><span>login</span></a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</div>
 	</header>
 
-    <main>
-        <section id="login">
+	<main>
+		<section id="login">
 			<h2>Log In</h2>
-			<form action="#" method="post">
+			<form action="./index.html" method="post">
 				<label for="email">Email</label>
 				<input type="email" name="email" id="email">
 				<label for="mdp">Mot de passe</label>
-				<input type="text" name="mdp" id="mdp">
+				<input type="password" name="mdp" id="mdp">
+				<p></p>
 				<input type="submit" value="Se connecter">
 			</form>
-            <a>Mot de passe oublié ?</a>
+			<a>Mot de passe oublié ?</a>
 		</section>
-    </main>
+	</main>
 
-    <footer>
+	<footer>
 		<nav>
 			<ul>
 				<li>Mentions Légales</li>

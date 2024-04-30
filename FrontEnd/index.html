@@ -11,20 +11,27 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/45c0cb7e2a.js" crossorigin="anonymous"></script>
 	<script src="scripts/main.js" type="module" defer></script>
 </head>
 
 <body>
 	<header>
-		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-		<nav>
-			<ul>
-				<li><a href="index.html"><span>projets</span></a></li>
-				<li><a href="#">contact</a></li>
-				<li><a href="login.html">login</a></li>
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-			</ul>
-		</nav>
+		<div class="invisible">
+			<i class="fa-solid fa-pen-to-square"></i>
+			Mode édition
+		</div>
+		<div>
+			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+			<nav>
+				<ul>
+					<li><a href="index.html"><span>projets</span></a></li>
+					<li><a href="#">contact</a></li>
+					<li><a href="login.html">login</a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</div>
 	</header>
 	<main>
 		<section id="introduction">
@@ -43,7 +50,9 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="titre">
+				<h2>Mes Projets</h2>
+			</div>
 			<div class="filtres">
 			</div>
 			<div class="gallery">
