@@ -113,17 +113,27 @@ a span {
 	display: none;
 }
 
+.masque {
+	visibility: hidden;
+}
+
+.erreur {
+	color: red;
+	font-weight: 600;
+	padding: 10px 0;
+}
+
 
 /********** Header et Navigation **********/ 
 
-header div:nth-child(1) {
+#edition {
 	text-align: center;
 	background-color: black;
 	color: white;
-	padding: 15px;
+	padding: 20px;
 }
 
-header div:nth-child(2) {
+#menu {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0;
@@ -175,20 +185,16 @@ li:hover {
 }
 
 #portfolio h2 {
-	text-align: center;
 	margin-bottom: 1em;
 }
 
 #portfolio .titre {
+	display: flex;
 	margin: auto;
+	justify-content: space-around;
+	align-items: baseline;
 	width: 30%;
 	display: flex;
-	justify-content: space-around;
-}
-
-.titre button {
-	width: 30%;
-	outline: none;
 }
 
 .filtres {

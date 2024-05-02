@@ -86,27 +86,19 @@ function filtreTravaux(filtre) {
 }
 
 export function verifierMode() {
-    let utilisateur = window.localStorage.getItem("utilisateur")
-    utilisateur = JSON.parse(utilisateur)
-    console.log(utilisateur)
+    let token = window.localStorage.getItem("token")
+    console.log(token)
 
     //Bandeau "édition" est invisible
-    let bandeauEdition = document.querySelector("header div:nth-child(1)")
+    let bandeauEdition = document.getElementById("edition")
     bandeauEdition.classList.add("invisible")
 
-    //Si un utilisateur s'est connecté, création du bouton de modification
-    //et activation du bandeau "édition"
-    if (utilisateur != null) {
-        let titre = document.querySelector("#portfolio .titre")
+    //Si un utilisateur s'est connecté, affichage du bouton de modification
+    //et du bandeau "édition"
+    if (token != null) {
+        let btnModifier = document.getElementById("btn-modifier")
 
         bandeauEdition.classList.remove("invisible")
-
-        let btnModifier = document.createElement("button")
-        btnModifier.textContent = "Modifier"
-
-        let icone = document.createElement("i")
-        icone.classList.add("slip")
-        titre.appendChild(icone)
-        titre.appendChild(btnModifier)
+        btnModifier.classList.remove("invisible")
     }
 }

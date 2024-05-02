@@ -16,11 +16,7 @@
 
 <body>
 	<header>
-		<div class="invisible">
-			<i class="fa-solid fa-pen-to-square"></i>
-			Mode édition
-		</div>
-		<div>
+		<div id="menu">
 			<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 			<nav>
 				<ul>
@@ -41,7 +37,7 @@
 				<input type="email" name="email" id="email">
 				<label for="mdp">Mot de passe</label>
 				<input type="password" name="mdp" id="mdp">
-				<p></p>
+				<div class="erreur masque">Email et/ou mot de passe incorrect(s)</div>
 				<input type="submit" value="Se connecter">
 			</form>
 			<a>Mot de passe oublié ?</a>
