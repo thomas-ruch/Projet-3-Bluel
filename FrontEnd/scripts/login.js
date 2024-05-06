@@ -32,7 +32,7 @@ function envoyerLogin() {
             }
 
         } catch (erreur) {
-            console.log(`Erreur : ${erreur.message}`);
+            console.log("Erreur");
         }
     })
 }

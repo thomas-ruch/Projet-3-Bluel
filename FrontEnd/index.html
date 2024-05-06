@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/45c0cb7e2a.js" crossorigin="anonymous"></script>
 	<script src="scripts/main.js" type="module" defer></script>
+	<script src="scripts/modale.js" type="module" defer></script>
 </head>
 
 <body>
@@ -76,6 +77,17 @@
 			</form>
 		</section>
 	</main>
+	
+	<!-- Modale -->
+	<div id="background-modale" class="invisible">
+		<div id="modale">
+			<i class="fa-solid fa-xmark"></i>
+			<h3>Galerie photo</h3>
+			<div id="photos-modale">
+			</div>
+			<button id="btn-ajouter-photo" class="btn-selectionne">Ajouter une photo</button>
+		</div>
+	</div>
 
 	<footer>
 		<nav>
@@ -84,6 +96,8 @@
 			</ul>
 		</nav>
 	</footer>
+
+
 </body>
 
 </html>
