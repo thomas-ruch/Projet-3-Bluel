@@ -1,26 +1,14 @@
-import { recupererTravaux } from "./travaux.js"
-
-/**
- * Cette fonction affiche la modale. 
- */
 function afficherModale() {
     let bckgrdModale = document.getElementById("background-modale")
     bckgrdModale.classList.remove("invisible")
 }
 
-/**
- * Cette fonction cache la modale. 
- */
 function cacherModale() {
     let bckgrdModale = document.getElementById("background-modale")
     bckgrdModale.classList.add("invisible")
 }
 
-/**
- * Cette fonction initialise les écouteurs d'événements qui concernent 
- * l'affichage de la modale.  
- */
-function ajouterListenerModale() {
+export function ajouterListenerModale() {
     let btnModifier = document.getElementById("btn-modifier")
     let bckgrdModale = document.getElementById("background-modale")
     let btnFermer = document.querySelector("#modale i")
@@ -42,14 +30,14 @@ function ajouterListenerModale() {
     })
 }
 
-function insererMiniatures(tableau) {
+export function insererMiniatures(tableau) {
     let modale = document.getElementById("photos-modale")
 
     for (let i = 0; i < tableau.length; i++) {
         let divImage = document.createElement("div")
         let image = document.createElement("img")
 
-        divImage.innerHTML = `<i class="fa-solid fa-trash-can"></i>`
+        divImage.innerHTML = `<i class="btn-supprimer fa-solid fa-trash-can fa-xs"></i>`
         divImage.classList.add("carte")
 
         image.src=`${tableau[i].imageUrl}`
@@ -63,8 +51,3 @@ function insererMiniatures(tableau) {
 function supprimerTravail() {
 
 }
-
-
-ajouterListenerModale()
-
-recupererTravaux().then(reponse => insererMiniatures(reponse))

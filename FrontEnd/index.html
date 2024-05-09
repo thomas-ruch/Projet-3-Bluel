@@ -53,7 +53,7 @@
 		<section id="portfolio">
 			<div class="titre">
 				<h2>Mes Projets</h2>
-				<div id="btn-modifier" class="invisible">
+				<div id="btn-modifier" class="invisible clicable">
 					<i class="fa-solid fa-pen-to-square"></i>
 					Modifier
 				</div>
@@ -78,17 +78,6 @@
 		</section>
 	</main>
 	
-	<!-- Modale -->
-	<div id="background-modale" class="invisible">
-		<div id="modale">
-			<i class="fa-solid fa-xmark"></i>
-			<h3>Galerie photo</h3>
-			<div id="photos-modale">
-			</div>
-			<button id="btn-ajouter-photo" class="btn-selectionne">Ajouter une photo</button>
-		</div>
-	</div>
-
 	<footer>
 		<nav>
 			<ul>
@@ -96,8 +85,18 @@
 			</ul>
 		</nav>
 	</footer>
-
-
+	
+	<!-- Modale -->
+	<div id="background-modale" class="invisible">
+		<div id="modale">
+			<i class="btn-fermer fa-solid fa-xmark"></i>
+			<h3>Galerie photo</h3>
+			<div id="photos-modale">
+			</div>
+			<button id="btn-ajouter-photo" class="btn-selectionne clicable">Ajouter une photo</button>
+		</div>
+	</div>
+	
 </body>
 
 </html>

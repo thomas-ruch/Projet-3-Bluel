@@ -127,6 +127,10 @@ a span {
 	padding: 10px 0;
 }
 
+.clicable {
+	cursor: pointer;
+}
+
 
 /********** Header et Navigation **********/ 
 
@@ -311,7 +315,7 @@ input[type="submit"] {
 }
 
 #modale {
-    position: absolute;
+	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -323,24 +327,24 @@ input[type="submit"] {
     z-index: 10;
 }
 
-#modale i[class="fa-solid fa-xmark"] {
+.btn-fermer {
 	position: absolute;
+	cursor: pointer;
 	top: 3%;
-	left: 94%;
+	right: 3%;
+}
+
+.btn-supprimer {
+	position: absolute;
+	padding: 3px;
+	top: 10%;
+	right: 10%;
+	background-color: black;
+	color: white;
 }
 
 .carte {
 	position: relative;
-}
-
-.carte i[class="fa-solid fa-trash-can"] {
-	position: absolute;
-	top: 10%;
-	left: 60%;
-	padding: 5px;
-	background-color: black;
-	color: white;
-	border-radius: 3px;
 }
 
 #photos-modale {

@@ -1,6 +1,6 @@
 export async function recupererTravaux() {
     const reponse = await fetch("http://localhost:5678/api/works")
-    const travaux = await reponse.json()
+    const travaux = reponse.json()
 
     return travaux
 }
@@ -43,6 +43,7 @@ function insererFiltres(tableau) {
     for (let i = 0; i < categories.length; i++) {
         let bouton = document.createElement("button")
         bouton.textContent = `${categories[i]}`
+        bouton.classList.add("clicable")
 
         filtres.appendChild(bouton)
 
