@@ -314,7 +314,8 @@ input[type="submit"] {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-#modale {
+#modale,
+#modale-page2 {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -330,13 +331,13 @@ input[type="submit"] {
 .btn-fermer {
 	position: absolute;
 	cursor: pointer;
-	top: 3%;
-	right: 3%;
+	top: 15px;
+	right: 15px;
 }
 
 .btn-supprimer {
 	position: absolute;
-	padding: 3px;
+	padding: 10px 5px;
 	top: 10%;
 	right: 10%;
 	background-color: black;

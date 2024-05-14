@@ -1,8 +1,12 @@
 export async function recupererTravaux() {
-    const reponse = await fetch("http://localhost:5678/api/works")
-    const travaux = reponse.json()
-
-    return travaux
+    try {
+        const reponse = await fetch("http://localhost:5678/api/works")
+        const travaux = reponse.json()
+        
+        return travaux
+    } catch (erreur) {
+        console.error("Erreur lors de la récupération des travaux.")
+    }
 }
 
 export function insererTravauxEtFiltres(tableau) {
@@ -49,7 +53,7 @@ function insererFiltres(tableau) {
 
         bouton.addEventListener("click", () => {
             selectionneBouton(bouton)
-            filtreTravaux(bouton.textContent)
+            filtrerTravaux(bouton.textContent)
         })
 
         //Initialisation du premier bouton ("Tous") comme filtre actif
@@ -71,10 +75,9 @@ function selectionneBouton(bouton) {
     bouton.classList.add("btn-selectionne")
 }
 
-function filtreTravaux(filtre) {
+function filtrerTravaux(filtre) {
     //Sélection de tous les travaux de la galerie (<figure>)
     const figures = document.querySelectorAll(".gallery figure")
-    console.log(figures)
 
     //Ajout ou retrait de la classe "invisible" selon le filtre en argument
     for (let i = 0; i < figures.length; i++) {

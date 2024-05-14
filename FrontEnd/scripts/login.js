@@ -4,7 +4,6 @@ function envoyerLogin() {
     formLogin.addEventListener("submit", async function (event) {
         event.preventDefault()
 
-        
         const mdp = document.getElementById("mdp")
         const email = document.getElementById("email")
         
@@ -32,7 +31,7 @@ function envoyerLogin() {
             }
 
         } catch (erreur) {
-            console.log("Erreur");
+            console.error("Erreur lors de l'identification.");
         }
     })
 }
