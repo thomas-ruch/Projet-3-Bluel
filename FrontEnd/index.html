@@ -97,13 +97,25 @@
 		</div>
 		<div id="modale-page2" class="invisible">
 			<i class="btn-fermer fa-solid fa-xmark"></i>
-			<h3>Ajout photo</h3>
-			<input type="file">
-			<label for="titre">Titre</label>
-			<input type="text" name="titre">
-			<select>
-				<option></option>
-			</select>
+			<i class="btn-precedent fa-solid fa-arrow-left"></i>
+			<form method="post" action="#">
+				<h3>Ajout photo</h3>
+				<div id="btn-photo">
+					<i class="fa-regular fa-image fa-6x"></i>
+					<label for="photo">
+						<span class="clicable">+ Ajouter photo</span>
+						<input type="file" id="photo" name="photo" accept=".jpg, .png">
+					</label>
+					<p>jpg, png : 4 mo max</p>
+				</div>
+				<label for="titre">Titre</label>
+				<input type="text" id="titre" name="titre">
+				<label for="categorie">Catégorie</label>
+				<select name="categorie">
+					<option></option>
+				</select>
+				<input id="btn-valider" type="submit" value="Valider">
+			</form>
 		</div>
 	</div>
 

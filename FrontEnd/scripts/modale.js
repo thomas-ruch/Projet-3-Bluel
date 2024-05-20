@@ -1,3 +1,5 @@
+import { supprimerTravail } from "/scripts/travaux.js"
+
 function afficherModale() {
     const bckgrdModale = document.getElementById("background-modale")
     const modale = document.getElementById("modale")
@@ -17,28 +19,38 @@ function cacherModale() {
 }
 
 export function insererCartes(tableau) {
-    const modale = document.getElementById("photos-modale")
+    const photosModale = document.getElementById("photos-modale")
+
+    photosModale.innerHTML = ""
 
     for (let i = 0; i < tableau.length; i++) {
         let divImage = document.createElement("div")
         let image = document.createElement("img")
+        let poubelle = document.createElement("i")
 
-        divImage.innerHTML = `<i class="btn-supprimer clicable fa-solid fa-trash-can fa-xs"></i>`
         divImage.classList.add("carte")
-        divImage.dataset.id = `${tableau[i].id}`
+        poubelle.classList.add("btn-supprimer", "clicable", "fa-solid", "fa-trash-can", "fa-xs")
+        
+        poubelle.addEventListener("click", (event) => {
+            event.preventDefault()
+            supprimerTravail(tableau[i].id)
+        })
 
         image.src = `${tableau[i].imageUrl}`
         image.alt = `${tableau[i].title}`
-
+        
+        divImage.appendChild(poubelle)
         divImage.appendChild(image)
-        modale.appendChild(divImage)
+        photosModale.appendChild(divImage)   
     }
 }
 
 export function ajouterListenerModale() {
+    // Ajout des listeners aux boutons "simples"
     const btnModifier = document.getElementById("btn-modifier")
     const bckgrdModale = document.getElementById("background-modale")
     const btnFermer = document.querySelectorAll("#background-modale .btn-fermer")
+    const btnPrecedent = document.getElementById("btn-precedent")
     const btnAjoutPhoto = document.getElementById("btn-ajouter-photo")
 
     btnModifier.addEventListener("click", () => {
@@ -57,6 +69,10 @@ export function ajouterListenerModale() {
         })
     }
 
+    btnPrecedent.addEventListener("click", () => {
+        afficherModale()
+    })
+
     const modale = document.getElementById("modale")
     const modaleP2 = document.getElementById("modale-page2")
 
@@ -64,33 +80,5 @@ export function ajouterListenerModale() {
         modale.classList.add("invisible")
         modaleP2.classList.remove("invisible")
     })
-
-    setTimeout(() => {
-        let boutonsSupprimer = document.querySelectorAll("#photos-modale .btn-supprimer")
-        console.log(boutonsSupprimer)
-
-        for (let i = 0; i < boutonsSupprimer.length; i++) {
-            boutonsSupprimer[i].addEventListener("click", () => {
-                supprimerTravail(boutonsSupprimer[i].parentNode.dataset.id)
-            })
-        }
-    }, 200)
 }
 
-async function supprimerTravail(id) {
-    const options = {
-        method: "DELETE",
-        headers: {
-            // "Content-Type": "*",
-            "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
-        },
-    }
-    console.log(options)
-
-    try {
-        await fetch(`http://localhost:5678/api/users/works/${id}`, options)
-    }
-    catch (erreur) {
-        console.error("Erreur lors de la suppression d'un travail.", erreur)
-    }
-}

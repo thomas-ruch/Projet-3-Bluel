@@ -1,9 +1,16 @@
+import { insererCartes } from "/scripts/modale.js"
+
+let travaux = []
+
 export async function recupererTravaux() {
     try {
         const reponse = await fetch("http://localhost:5678/api/works")
-        const travaux = reponse.json()
+        const tableau = await reponse.json()
+
+        travaux = Array.from(tableau)
+        console.log("travaux :", travaux)
         
-        return travaux
+        return tableau
     } catch (erreur) {
         console.error("Erreur lors de la récupération des travaux.")
     }
@@ -12,9 +19,12 @@ export async function recupererTravaux() {
 export function insererTravauxEtFiltres(tableau) {
     const galerie = document.querySelector(".gallery")
 
+    galerie.innerHTML=""
+
     for (let i = 0; i < tableau.length; i++) {
         let figure = document.createElement("figure")
         figure.dataset.categorie = `${tableau[i].category.name}`
+        figure.dataset.id = `${tableau[i].id}`
 
         figure.innerHTML += `
             <img src="${tableau[i].imageUrl}" alt="${tableau[i].title}">
@@ -43,6 +53,8 @@ function insererFiltres(tableau) {
 
     //Insertion des boutons-filtres dans le code HTML
     const filtres = document.querySelector(".filtres")
+
+    filtres.innerHTML=""
 
     for (let i = 0; i < categories.length; i++) {
         let bouton = document.createElement("button")
@@ -91,7 +103,6 @@ function filtrerTravaux(filtre) {
 
 export function verifierMode() {
     let token = window.localStorage.getItem("token")
-    console.log(token)
 
     //Bandeau "édition" est invisible
     let bandeauEdition = document.getElementById("edition")
@@ -105,4 +116,32 @@ export function verifierMode() {
         bandeauEdition.classList.remove("invisible")
         btnModifier.classList.remove("invisible")
     }
+}
+
+export async function supprimerTravail(id) {
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
+        },
+    }
+
+    try {
+        await fetch(`http://localhost:5678/api/works/${id}`, options)
+    }
+    catch (erreur) {
+        console.error("Erreur lors de la suppression d'un travail.", erreur)
+    }
+
+    console.log("Tableau avant traitement :", travaux)
+
+    for (let i = 0; i < travaux.length; i++) {
+        if (travaux[i].id === id) {
+            travaux.splice(i,1)
+        }
+    }
+    console.log("Tableau après traitement :", travaux)
+
+    insererTravauxEtFiltres(travaux)
+    insererCartes(travaux)
 }
