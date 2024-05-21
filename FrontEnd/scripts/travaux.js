@@ -60,6 +60,7 @@ function insererFiltres(tableau) {
         let bouton = document.createElement("button")
         bouton.textContent = `${categories[i]}`
         bouton.classList.add("clicable")
+        bouton.classList.add("bouton")
 
         filtres.appendChild(bouton)
 

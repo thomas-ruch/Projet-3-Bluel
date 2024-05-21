@@ -50,7 +50,6 @@ export function ajouterListenerModale() {
     const btnModifier = document.getElementById("btn-modifier")
     const bckgrdModale = document.getElementById("background-modale")
     const btnFermer = document.querySelectorAll("#background-modale .btn-fermer")
-    const btnPrecedent = document.getElementById("btn-precedent")
     const btnAjoutPhoto = document.getElementById("btn-ajouter-photo")
 
     btnModifier.addEventListener("click", () => {
@@ -68,10 +67,6 @@ export function ajouterListenerModale() {
             cacherModale()
         })
     }
-
-    btnPrecedent.addEventListener("click", () => {
-        afficherModale()
-    })
 
     const modale = document.getElementById("modale")
     const modaleP2 = document.getElementById("modale-page2")

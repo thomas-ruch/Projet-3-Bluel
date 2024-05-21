@@ -113,6 +113,11 @@ a span {
 	font-weight: 600;
 }
 
+.bouton {
+	padding: 10px 20px;
+	border-radius: 25px;
+}
+
 .invisible {
 	display: none;
 }
@@ -218,9 +223,7 @@ li:hover {
 #modale button {
 	font-family: 'Syne';
 	font-size: 16px;
-	padding: 10px 20px;
 	border: solid 1px #1D6154;
-	border-radius: 25px;
 }
 
 .btn-selectionne {
@@ -268,14 +271,16 @@ li:hover {
 
 #contact form,
 #login form {
-	text-align: left;
-	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
+	text-align: left;
+	margin-top: 30px;
 }
 
 #contact input,
-#login input {
+#login input,
+#modale-page2 input,
+#modale-page2 select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -283,7 +288,8 @@ li:hover {
 }
 
 #contact label,
-#login label {
+#login label,
+#modale-page2 label {
 	margin: 2em 0 1em 0;
 }
 
@@ -372,18 +378,38 @@ input[type="submit"] {
 	padding: 5px;
 }
 
+#ajout-photo {
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	background-color: rgb(233,241,246);
+	border-radius: 5px;
+	color: grey;
+	padding: 20px;
+	margin-top: 30px;
+}
+
+#ajout-photo i {
+	margin: 10px;
+}
+
+#ajout-photo label {
+	margin-top: 0;
+}
+
+#ajout-photo p {
+
+}
+
 #modale-page2 form {
 	display: flex;
 	flex-direction: column;
+	text-align: left;
+	margin-top: 30px;
 }
 
 #modale-page2 input[type=file] {
 	display: none;
-}
-
-#btn-photo {
-	display: flex;
-	flex-direction: column;
 }
 
 /********** Footer **********/
