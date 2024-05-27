@@ -33,7 +33,7 @@ export function insererCartes(tableau) {
         
         poubelle.addEventListener("click", (event) => {
             event.preventDefault()
-            supprimerTravail(tableau[i].id)
+            supprimerTravail(tableau, tableau[i].id)
         })
 
         image.src = `${tableau[i].imageUrl}`
@@ -50,6 +50,7 @@ export function ajouterListenerModale() {
     const btnModifier = document.getElementById("btn-modifier")
     const bckgrdModale = document.getElementById("background-modale")
     const btnFermer = document.querySelectorAll("#background-modale .btn-fermer")
+    const btnPrecedent = document.getElementById("btn-precedent")
     const btnAjoutPhoto = document.getElementById("btn-ajouter-photo")
 
     btnModifier.addEventListener("click", () => {
@@ -75,5 +76,19 @@ export function ajouterListenerModale() {
         modale.classList.add("invisible")
         modaleP2.classList.remove("invisible")
     })
+
+    btnPrecedent.addEventListener("click", () => {
+        afficherModale()
+    })
 }
 
+function inserer(element) {
+
+    const hauteurFenetre = window.innerHeight
+
+    hauteur = element.offsetHeight
+
+    if (hauteur > hauteurFenetre) {
+        
+    }
+}

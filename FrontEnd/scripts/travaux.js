@@ -1,25 +1,35 @@
 import { insererCartes } from "/scripts/modale.js"
 
-let travaux = []
-
 export async function recupererTravaux() {
+    let travaux = []
+
     try {
         const reponse = await fetch("http://localhost:5678/api/works")
-        const tableau = await reponse.json()
-
-        travaux = Array.from(tableau)
-        console.log("travaux :", travaux)
-        
-        return tableau
+        travaux = reponse.json()
     } catch (erreur) {
-        console.error("Erreur lors de la récupération des travaux.")
+        console.error("Erreur lors de la récupération des travaux.", erreur)
     }
+
+    return travaux
 }
 
-export function insererTravauxEtFiltres(tableau) {
+export async function recupererCategories() {
+    let categories = []
+    
+    try {
+        const reponse = await fetch("http://localhost:5678/api/categories")
+        categories = reponse.json()
+    } catch (erreur) {
+        console.error("Erreur lors de la récupération des catégories.", erreur)
+    }
+    
+    return categories
+}
+
+export function insererTravaux(tableau) {
     const galerie = document.querySelector(".gallery")
 
-    galerie.innerHTML=""
+    galerie.innerHTML = ""
 
     for (let i = 0; i < tableau.length; i++) {
         let figure = document.createElement("figure")
@@ -27,16 +37,27 @@ export function insererTravauxEtFiltres(tableau) {
         figure.dataset.id = `${tableau[i].id}`
 
         figure.innerHTML += `
-            <img src="${tableau[i].imageUrl}" alt="${tableau[i].title}">
-            <figcaption>${tableau[i].title}</figcaption>`
+        <img src="${tableau[i].imageUrl}" alt="${tableau[i].title}">
+        <figcaption>${tableau[i].title}</figcaption>`
 
         galerie.appendChild(figure)
     }
-
-    insererFiltres(tableau)
 }
 
-function insererFiltres(tableau) {
+export function insererCategories(tableau) {
+
+    const cat = document.querySelector("select[name=categorie]")
+
+    for (let i = 0; i < tableau.length; i++) {
+        let option = document.createElement("option")
+        option.value = `${tableau[i].name}`
+        option.innerHTML = `${tableau[i].name}`
+        console.log(option)
+        cat.appendChild(option)
+    }
+}
+
+export function insererFiltres(tableau) {
     //Extraction des noms de catégories de tous les travaux depuis tableau
     let categories = tableau.map(tableau => tableau.category.name)
 
@@ -54,13 +75,12 @@ function insererFiltres(tableau) {
     //Insertion des boutons-filtres dans le code HTML
     const filtres = document.querySelector(".filtres")
 
-    filtres.innerHTML=""
+    filtres.innerHTML = ""
 
     for (let i = 0; i < categories.length; i++) {
         let bouton = document.createElement("button")
         bouton.textContent = `${categories[i]}`
-        bouton.classList.add("clicable")
-        bouton.classList.add("bouton")
+        bouton.classList.add("bouton", "blanc", "clicable")
 
         filtres.appendChild(bouton)
 
@@ -81,11 +101,11 @@ function selectionneBouton(bouton) {
     // Désélection de tous les boutons
     const boutons = document.querySelectorAll(".filtres button")
     for (let i = 0; i < boutons.length; i++) {
-        boutons[i].classList.remove("btn-selectionne")
+        boutons[i].classList.remove("vert")
     }
 
     // Sélection du bouton cliqué
-    bouton.classList.add("btn-selectionne")
+    bouton.classList.add("vert")
 }
 
 function filtrerTravaux(filtre) {
@@ -119,7 +139,7 @@ export function verifierMode() {
     }
 }
 
-export async function supprimerTravail(id) {
+export async function supprimerTravail(tableau, id) {
     const options = {
         method: "DELETE",
         headers: {
@@ -134,15 +154,18 @@ export async function supprimerTravail(id) {
         console.error("Erreur lors de la suppression d'un travail.", erreur)
     }
 
-    console.log("Tableau avant traitement :", travaux)
+    console.log("Tableau avant traitement :", tableau)
 
-    for (let i = 0; i < travaux.length; i++) {
-        if (travaux[i].id === id) {
-            travaux.splice(i,1)
+    for (let i = 0; i < tableau.length; i++) {
+        if (tableau[i].id === id) {
+            tableau.splice(i, 1)
         }
     }
-    console.log("Tableau après traitement :", travaux)
+    console.log("Tableau après traitement :", tableau)
 
-    insererTravauxEtFiltres(travaux)
-    insererCartes(travaux)
+    insererTravaux(tableau)
+    insererFiltres(tableau)
+    insererCartes(tableau)
+
+    return tableau
 }

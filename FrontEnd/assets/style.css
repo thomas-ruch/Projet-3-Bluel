@@ -116,6 +116,36 @@ a span {
 .bouton {
 	padding: 10px 20px;
 	border-radius: 25px;
+	font-family: 'Syne';
+	font-size: 16px;
+}
+
+.blanc {
+	font-family: 'Syne';
+	border: solid 1px #1D6154;
+	color: #1D6154;
+	background-color: white;
+}
+
+.vert {
+	font-family: 'Syne';
+	border: solid 1px #1D6154;
+	color: white;
+	background-color: #1D6154;
+}
+
+.gris-fonce {
+	font-family: 'Syne';
+	border: solid 1px #A7A7A7;
+	color: white;
+	background-color: #A7A7A7;
+}
+
+.gris-clair {
+	font-family: 'Work sans';
+	border: solid 1px #CCD6DC;
+	color: #3A6784;
+	background-color: #CCD6DC;
 }
 
 .invisible {
@@ -211,24 +241,11 @@ li:hover {
 }
 
 .filtres {
-	color: #1D6154;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	padding-bottom: 30px;
+	margin-bottom: 30px;
 	gap: 30px;
-}
-
-.filtres button,
-#modale button {
-	font-family: 'Syne';
-	font-size: 16px;
-	border: solid 1px #1D6154;
-}
-
-.btn-selectionne {
-	background-color: #1D6154;
-	color: white;
 }
 
 .gallery {
@@ -285,6 +302,7 @@ li:hover {
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding-left: 10px;
 }
 
 #contact label,
@@ -299,14 +317,10 @@ li:hover {
 }
 
 input[type="submit"] {
-	font-family: 'Syne';
 	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
 	margin: 2em auto;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px;
 }
 
 /********** Modale **********/
@@ -324,7 +338,6 @@ input[type="submit"] {
 #modale-page2 {
 	overflow: auto;
 	width: 450px;
-	max-width: calc(100vw - 30px);
 	max-height: calc(100vh - 30px);
     padding: 40px;
 	background-color: white;
@@ -340,15 +353,15 @@ input[type="submit"] {
 .btn-fermer {
 	position: absolute;
 	cursor: pointer;
-	top: 15px;
-	right: 15px;
+	top: 20px;
+	right: 20px;
 }
 
-.btn-precedent {
+#btn-precedent {
 	position: absolute;
 	cursor: pointer;
-	top: 15px;
-	left: 15px;
+	top: 20px;
+	left: 20px;
 }
 
 .btn-supprimer {
@@ -368,7 +381,7 @@ input[type="submit"] {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
-	border-bottom: gray solid 1px;
+	border-bottom: solid 1px gray;
 	margin: 30px 50px;
 	padding-bottom: 30px;
 }
@@ -387,6 +400,7 @@ input[type="submit"] {
 	color: grey;
 	padding: 20px;
 	margin-top: 30px;
+	gap: 10px;
 }
 
 #ajout-photo i {
@@ -398,14 +412,18 @@ input[type="submit"] {
 }
 
 #ajout-photo p {
+	color: black;
+	font-size: 12px;
+}
 
+#modale-page2 select {
+	appearance: none;
 }
 
 #modale-page2 form {
 	display: flex;
 	flex-direction: column;
 	text-align: left;
-	margin-top: 30px;
 }
 
 #modale-page2 input[type=file] {
