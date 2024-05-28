@@ -82,13 +82,18 @@ export function ajouterListenerModale() {
     })
 }
 
-function inserer(element) {
+export function afficherPhoto() {
 
-    const hauteurFenetre = window.innerHeight
+    const inputPhoto = document.querySelector("#ajout-photo input")
+    const divPhoto = document.getElementById("ajout-photo")
 
-    hauteur = element.offsetHeight
+    inputPhoto.addEventListener("change", () => {
+        let fichiers = inputPhoto.files
+        let photo = document.createElement("img")
 
-    if (hauteur > hauteurFenetre) {
-        
-    }
+        divPhoto.innerHTML = ""
+
+        photo.src = window.URL.createObjectURL(fichiers[0])
+        divPhoto.append(photo)
+    })
 }

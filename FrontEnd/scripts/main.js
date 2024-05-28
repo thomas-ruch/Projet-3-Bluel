@@ -1,5 +1,5 @@
 import { recupererTravaux, insererTravaux, insererFiltres, verifierMode, recupererCategories, insererCategories } from "./travaux.js"
-import { insererCartes, ajouterListenerModale } from "./modale.js"
+import { insererCartes, ajouterListenerModale, afficherPhoto } from "./modale.js"
 
 let travaux = []
 
@@ -17,5 +17,6 @@ recupererTravaux().then((reponse) => {
 //Préparation de la modale
 recupererCategories().then((cat => {
     insererCategories(cat)
+    afficherPhoto()
 }))
 ajouterListenerModale()
