@@ -114,28 +114,25 @@ a span {
 }
 
 .bouton {
-	padding: 10px 20px;
+	padding: 10px;
 	border-radius: 25px;
 	font-family: 'Syne';
 	font-size: 16px;
 }
 
 .blanc {
-	font-family: 'Syne';
 	border: solid 1px #1D6154;
 	color: #1D6154;
 	background-color: white;
 }
 
 .vert {
-	font-family: 'Syne';
 	border: solid 1px #1D6154;
 	color: white;
 	background-color: #1D6154;
 }
 
 .gris-fonce {
-	font-family: 'Syne';
 	border: solid 1px #A7A7A7;
 	color: white;
 	background-color: #A7A7A7;
@@ -196,6 +193,7 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
 
 
 /********** Sections index.html et login.html **********/ 
@@ -381,9 +379,7 @@ input[type="submit"] {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
-	border-bottom: solid 1px gray;
 	margin: 30px 50px;
-	padding-bottom: 30px;
 }
 
 #photos-modale img {
@@ -391,7 +387,7 @@ input[type="submit"] {
 	padding: 5px;
 }
 
-#ajout-photo {
+#ajout-photo label {
 	display: flex;
 	text-align: center;
 	flex-direction: column;
@@ -407,13 +403,14 @@ input[type="submit"] {
 	margin: 10px;
 }
 
-#ajout-photo label {
-	margin-top: 0;
-}
-
 #ajout-photo p {
 	color: black;
 	font-size: 12px;
+}
+
+#preview-photo img {
+	height: 200px;
+	object-fit: contain;
 }
 
 #modale-page2 select {

@@ -93,6 +93,7 @@
 			<h3>Galerie photo</h3>
 			<div id="photos-modale">
 			</div>
+			<hr>
 			<button id="btn-ajouter-photo" class="bouton vert clicable">Ajouter une photo</button>
 		</div>
 		<div id="modale-page2" class="invisible">
@@ -101,12 +102,18 @@
 			<h3>Ajout photo</h3>
 			<form method="post" action="#">
 				<div id="ajout-photo">
-					<i class="fa-regular fa-image fa-6x"></i>
 					<label for="photo" class="clicable">
+						<i class="fa-regular fa-image fa-6x"></i>
 						<span class="bouton gris-clair">+ Ajouter photo</span>
 						<input type="file" id="photo" name="photo" accept="image/jpg, image/png">
+						<p>jpg, png : 4 mo max</p>
 					</label>
-					<p>jpg, png : 4 mo max</p>
+				</div>
+				<div id="preview-photo" class="invisible">
+					<label for="photo" class="clicable">
+						<input type="file" id="photo" name="photo" accept="image/jpg, image/png">
+						<img src="#">
+					</label>
 				</div>
 				<label for="titre">Titre</label>
 				<input type="text" id="titre" name="titre">
@@ -114,6 +121,7 @@
 				<select name="categorie">
 				</select>
 				<p class="erreur masque">Formulaire incomplet</p>
+				<hr>
 				<input id="btn-valider" type="submit" value="Valider" disabled=true class="bouton gris-fonce">
 			</form>
 		</div>

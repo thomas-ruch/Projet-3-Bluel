@@ -1,11 +1,11 @@
 import { recupererTravaux, insererTravaux, insererFiltres, verifierMode, recupererCategories, insererCategories } from "./travaux.js"
-import { insererCartes, ajouterListenerModale, afficherPhoto } from "./modale.js"
+import { insererCartes, ajouterListenerModale, afficherPreviewPhoto } from "./modale.js"
 
 let travaux = []
 
 verifierMode()
 
-// Préparation de la page principale
+// Fonctionnement de la page principale
 recupererTravaux().then((reponse) => {
     travaux = reponse
 
@@ -14,9 +14,9 @@ recupererTravaux().then((reponse) => {
     insererCartes(travaux)   
 })
 
-//Préparation de la modale
+// Fonctionnement de la modale
 recupererCategories().then((cat => {
     insererCategories(cat)
-    afficherPhoto()
 }))
 ajouterListenerModale()
+afficherPreviewPhoto()

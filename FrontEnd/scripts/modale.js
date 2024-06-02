@@ -30,7 +30,7 @@ export function insererCartes(tableau) {
 
         divImage.classList.add("carte")
         poubelle.classList.add("btn-supprimer", "clicable", "fa-solid", "fa-trash-can", "fa-xs")
-        
+
         poubelle.addEventListener("click", (event) => {
             event.preventDefault()
             supprimerTravail(tableau, tableau[i].id)
@@ -38,10 +38,10 @@ export function insererCartes(tableau) {
 
         image.src = `${tableau[i].imageUrl}`
         image.alt = `${tableau[i].title}`
-        
+
         divImage.appendChild(poubelle)
         divImage.appendChild(image)
-        photosModale.appendChild(divImage)   
+        photosModale.appendChild(divImage)
     }
 }
 
@@ -60,12 +60,14 @@ export function ajouterListenerModale() {
     bckgrdModale.addEventListener("click", (event) => {
         if (event.target === bckgrdModale) {
             cacherModale()
+            reinitialiserPreviewPhoto()
         }
     })
 
     for (let i = 0; i < btnFermer.length; i++) {
         btnFermer[i].addEventListener("click", () => {
             cacherModale()
+            reinitialiserPreviewPhoto()
         })
     }
 
@@ -79,21 +81,46 @@ export function ajouterListenerModale() {
 
     btnPrecedent.addEventListener("click", () => {
         afficherModale()
+        reinitialiserPreviewPhoto()
     })
 }
 
-export function afficherPhoto() {
+export function afficherPreviewPhoto() {
 
     const inputPhoto = document.querySelector("#ajout-photo input")
-    const divPhoto = document.getElementById("ajout-photo")
+    const ajoutPhoto = document.getElementById("ajout-photo")
+    const previewPhoto = document.getElementById("preview-photo")
+    const imgPreviewPhoto = document.querySelector("#preview-photo img")
 
     inputPhoto.addEventListener("change", () => {
         let fichiers = inputPhoto.files
-        let photo = document.createElement("img")
 
-        divPhoto.innerHTML = ""
-
-        photo.src = window.URL.createObjectURL(fichiers[0])
-        divPhoto.append(photo)
+        if (fichiers.length > 0 && verifierFichier(fichiers[0])) {
+            imgPreviewPhoto.src = window.URL.createObjectURL(fichiers[0])
+            previewPhoto.classList.remove("invisible")
+            ajoutPhoto.classList.add("invisible")
+        }
     })
+}
+
+function reinitialiserPreviewPhoto() {
+    const ajoutPhoto = document.getElementById("ajout-photo")
+    const previewPhoto = document.getElementById("preview-photo")
+
+    previewPhoto.classList.add("invisible")
+    ajoutPhoto.classList.remove("invisible")
+}
+
+function verifierFichier(fichier) {
+    const fichierRegExp = new RegExp("\.(?:jpe?g|png)$", "i")
+    let retour = false
+
+    if (fichierRegExp.test(fichier.name) && fichier.size < 4200000) {
+        retour = true
+        console.log("Le fichier " + fichier.name + " est valide.")
+    } else {
+        console.log("Le fichier " + fichier.name + " n'est pas valide.")
+    }
+
+    return retour
 }
