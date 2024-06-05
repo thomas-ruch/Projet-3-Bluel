@@ -62,12 +62,18 @@ table {
 
 /********** CSS général **********/ 
 
+:root {
+    --main-color: #1D6154;
+    --main-bg-color: #FEFEF9;
+    --disable-color: #A7A7A7;
+}
+
 body {
 	max-width: 1140px;
 	margin: auto;
 	font-family: 'Work Sans';
 	font-size: 14px;
-	background-color: #fefef9;
+	background-color: var(--main-bg-color);
 }
 
 section {
@@ -93,11 +99,12 @@ h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: var(--main-color)
 }
 
 h3 {
-	font-size: 26px;
+	font-size: 22px;
+	font-family: 'Work Sans'
 }
 
 a {
@@ -113,32 +120,35 @@ a span {
 	font-weight: 600;
 }
 
+
+/********** Classes utilisées pour les boutons et filtres **********/
+
 .bouton {
-	padding: 10px;
+	padding: 8px 30px;
 	border-radius: 25px;
 	font-family: 'Syne';
-	font-size: 16px;
+	font-size: 14px;
 }
 
-.blanc {
-	border: solid 1px #1D6154;
-	color: #1D6154;
+.classique {
+	border: solid 1px var(--main-color);
+	color: var(--main-color);
 	background-color: white;
 }
 
-.vert {
-	border: solid 1px #1D6154;
+.selectionne {
+	border: solid 1px var(--main-color);
 	color: white;
-	background-color: #1D6154;
+	background-color: var(--main-color);
 }
 
-.gris-fonce {
-	border: solid 1px #A7A7A7;
+.desactive {
+	border: solid 1px var(--disable-color);
 	color: white;
-	background-color: #A7A7A7;
+	background-color: var(--disable-color);
 }
 
-.gris-clair {
+.indicatif {
 	font-family: 'Work sans';
 	border: solid 1px #CCD6DC;
 	color: #3A6784;
@@ -194,6 +204,11 @@ li:hover {
 	color: #B1663C;
 }
 
+hr {
+  	color: var(--disable-color);
+	margin: 40px 0px;
+	width: 100%;
+}
 
 
 /********** Sections index.html et login.html **********/ 
@@ -293,8 +308,8 @@ li:hover {
 }
 
 #contact input,
-#login input,
-#modale-page2 input,
+#login input:not(input[type=submit]),
+#modale-page2 input:not(input[type=submit]),
 #modale-page2 select {
 	height: 50px;
 	font-size: 1.2em;
@@ -316,7 +331,7 @@ li:hover {
 
 input[type="submit"] {
 	font-weight: 700;
-	margin: 2em auto;
+	margin: 1.5em auto;
 	width: 180px;
 	text-align: center;
 }
@@ -334,10 +349,8 @@ input[type="submit"] {
 
 #modale,
 #modale-page2 {
-	overflow: auto;
-	width: 450px;
-	max-height: calc(100vh - 30px);
-    padding: 40px;
+	width: 400px;
+    padding: 40px 60px;
 	background-color: white;
 	position: absolute;
 	top: 50%;
@@ -365,10 +378,14 @@ input[type="submit"] {
 .btn-supprimer {
 	position: absolute;
 	padding: 10px 5px;
-	top: 10%;
-	right: 10%;
+	top: 5%;
+	right: 5%;
 	background-color: black;
 	color: white;
+}
+
+#btn-valider {
+	margin: 0px auto;
 }
 
 .carte {
@@ -377,14 +394,15 @@ input[type="submit"] {
 
 #photos-modale {
 	display: flex;
+	padding: 30px 0px 0px;
 	flex-flow: row wrap;
 	justify-content: flex-start;
-	margin: 30px 50px;
+	gap: 5px;
 }
 
 #photos-modale img {
-	height: 100px;
-	padding: 5px;
+	width: 75px;
+	margin-bottom: 10px;
 }
 
 #ajout-photo label {

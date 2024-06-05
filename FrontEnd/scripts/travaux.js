@@ -52,7 +52,6 @@ export function insererCategories(tableau) {
         let option = document.createElement("option")
         option.value = `${tableau[i].name}`
         option.innerHTML = `${tableau[i].name}`
-        console.log(option)
         cat.appendChild(option)
     }
 }
@@ -80,7 +79,7 @@ export function insererFiltres(tableau) {
     for (let i = 0; i < categories.length; i++) {
         let bouton = document.createElement("button")
         bouton.textContent = `${categories[i]}`
-        bouton.classList.add("bouton", "blanc", "clicable")
+        bouton.classList.add("bouton", "classique", "clicable")
 
         filtres.appendChild(bouton)
 
@@ -101,11 +100,11 @@ function selectionneBouton(bouton) {
     // Désélection de tous les boutons
     const boutons = document.querySelectorAll(".filtres button")
     for (let i = 0; i < boutons.length; i++) {
-        boutons[i].classList.remove("vert")
+        boutons[i].classList.remove("selectionne")
     }
 
     // Sélection du bouton cliqué
-    bouton.classList.add("vert")
+    bouton.classList.add("selectionne")
 }
 
 function filtrerTravaux(filtre) {

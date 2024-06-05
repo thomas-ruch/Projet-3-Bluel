@@ -8,6 +8,8 @@ function afficherModale() {
     bckgrdModale.classList.remove("invisible")
     modale.classList.remove("invisible")
     modaleP2.classList.add("invisible")
+
+    reinitialiserFormulaire()
 }
 
 function cacherModale() {
@@ -46,7 +48,7 @@ export function insererCartes(tableau) {
 }
 
 export function ajouterListenerModale() {
-    // Ajout des listeners aux boutons "simples"
+    // Ajout des listeners aux boutons
     const btnModifier = document.getElementById("btn-modifier")
     const bckgrdModale = document.getElementById("background-modale")
     const btnFermer = document.querySelectorAll("#background-modale .btn-fermer")
@@ -60,14 +62,12 @@ export function ajouterListenerModale() {
     bckgrdModale.addEventListener("click", (event) => {
         if (event.target === bckgrdModale) {
             cacherModale()
-            reinitialiserPreviewPhoto()
         }
     })
 
     for (let i = 0; i < btnFermer.length; i++) {
         btnFermer[i].addEventListener("click", () => {
             cacherModale()
-            reinitialiserPreviewPhoto()
         })
     }
 
@@ -81,7 +81,14 @@ export function ajouterListenerModale() {
 
     btnPrecedent.addEventListener("click", () => {
         afficherModale()
-        reinitialiserPreviewPhoto()
+    })
+
+    // Ajout des listeners aux inputs
+    const inputTitre = document.getElementById("titre")
+    console.log(inputTitre)
+
+    inputTitre.addEventListener("input", () => {
+        verifierFormulaire()
     })
 }
 
@@ -100,15 +107,9 @@ export function afficherPreviewPhoto() {
             previewPhoto.classList.remove("invisible")
             ajoutPhoto.classList.add("invisible")
         }
+
+        verifierFormulaire()
     })
-}
-
-function reinitialiserPreviewPhoto() {
-    const ajoutPhoto = document.getElementById("ajout-photo")
-    const previewPhoto = document.getElementById("preview-photo")
-
-    previewPhoto.classList.add("invisible")
-    ajoutPhoto.classList.remove("invisible")
 }
 
 function verifierFichier(fichier) {
@@ -123,4 +124,34 @@ function verifierFichier(fichier) {
     }
 
     return retour
+}
+
+function reinitialiserFormulaire() {
+    const ajoutPhoto = document.getElementById("ajout-photo")
+    const previewPhoto = document.getElementById("preview-photo")
+    const formulaire = document.querySelector("#modale-page2 form")
+
+    previewPhoto.classList.add("invisible")
+    ajoutPhoto.classList.remove("invisible")
+
+    formulaire.reset()
+
+    verifierFormulaire() 
+}
+
+function verifierFormulaire() {
+    const inputPhoto = document.getElementById("photo")
+    const inputTitre = document.getElementById("titre")
+    const btnValider = document.getElementById("btn-valider")
+
+    console.log("Vérification du formulaire :", inputPhoto.files, inputTitre.value)
+
+    if (inputPhoto.files != 0 && inputTitre.value != "") {
+        btnValider.disabled = false
+        btnValider.classList.remove("desactive")
+        btnValider.classList.add("selectionne", "clicable")
+    } else {
+        btnValider.classList.add("desactive")
+        btnValider.classList.remove("selectionne", "clicable")
+    }
 }
