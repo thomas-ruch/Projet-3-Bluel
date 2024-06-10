@@ -105,22 +105,22 @@
 					<label for="photo" class="clicable">
 						<i class="fa-regular fa-image fa-6x"></i>
 						<span class="bouton indicatif">+ Ajouter photo</span>
-						<input type="file" id="photo" name="photo" accept="image/jpg, image/png">
+						<input type="file" id="photo" name="image" accept="image/jpg, image/png">
 						<p>jpg, png : 4 mo max</p>
 					</label>
 				</div>
 				<div id="preview-photo" class="invisible">
 					<label for="photo" class="clicable">
-						<input type="file" id="photo" name="photo" accept="image/jpg, image/png">
+						<input type="file" id="photo" name="image" accept="image/jpg, image/png">
 						<img src="#">
 					</label>
 				</div>
 				<label for="titre">Titre</label>
-				<input type="text" id="titre" name="titre">
-				<label for="categorie">Catégorie</label>
-				<select name="categorie"></select>
+				<input type="text" id="titre" name="title">
+				<label for="catégorie">Catégorie</label>
+				<select id="catégorie" name="categoryId"></select>
 				<hr>
-				<input id="btn-valider" type="submit" value="Valider" disabled=true class="bouton desactive clicable">
+				<input type="submit" id="btn-valider" value="Valider" disabled=true class="bouton desactive clicable">
 			</form>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-import { supprimerTravail } from "/scripts/travaux.js"
+import { supprimerTravail, envoyerTravail } from "/scripts/travaux.js"
 
 function afficherModale() {
     const bckgrdModale = document.getElementById("background-modale")
@@ -34,7 +34,6 @@ export function insererCartes(tableau) {
         poubelle.classList.add("btn-supprimer", "clicable", "fa-solid", "fa-trash-can", "fa-xs")
 
         poubelle.addEventListener("click", (event) => {
-            event.preventDefault()
             supprimerTravail(tableau, tableau[i].id)
         })
 
@@ -83,13 +82,21 @@ export function ajouterListenerModale() {
         afficherModale()
     })
 
-    // Ajout des listeners aux inputs
+    // Ajout des listeners aux inputs et aux submits
     const inputTitre = document.getElementById("titre")
     console.log(inputTitre)
 
     inputTitre.addEventListener("input", () => {
         verifierFormulaire()
     })
+
+    const formulaire = document.querySelector("#modale-page2 form")
+
+    formulaire.addEventListener("submit", (event) => {
+        event.preventDefault()
+        envoyerTravail(formulaire)
+    })
+    
 }
 
 export function afficherPreviewPhoto() {

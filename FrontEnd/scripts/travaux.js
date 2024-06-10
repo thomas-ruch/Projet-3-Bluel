@@ -15,14 +15,14 @@ export async function recupererTravaux() {
 
 export async function recupererCategories() {
     let categories = []
-    
+
     try {
         const reponse = await fetch("http://localhost:5678/api/categories")
         categories = reponse.json()
     } catch (erreur) {
         console.error("Erreur lors de la récupération des catégories.", erreur)
     }
-    
+
     return categories
 }
 
@@ -46,11 +46,11 @@ export function insererTravaux(tableau) {
 
 export function insererCategories(tableau) {
 
-    const cat = document.querySelector("select[name=categorie]")
+    const cat = document.getElementById("catégorie")
 
     for (let i = 0; i < tableau.length; i++) {
         let option = document.createElement("option")
-        option.value = `${tableau[i].name}`
+        option.value = `${tableau[i].id}`
         option.innerHTML = `${tableau[i].name}`
         cat.appendChild(option)
     }
@@ -167,4 +167,37 @@ export async function supprimerTravail(tableau, id) {
     insererCartes(tableau)
 
     return tableau
+}
+
+export function envoyerTravail(form) {
+    console.log(form)
+
+    const travailFD = new FormData(form)
+
+    let tabImages = travailFD.getAll("image")
+
+    for (let i = 0; i < tabImages.length; i++) {
+        if (tabImages[i].size === 0) {
+            tabImages.splice(i, 1)
+        }
+    }
+
+    travailFD.delete("image")
+    travailFD.append("image", tabImages[0])
+
+    const options = {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
+            "Content-Type": "multipart/form-data",
+        },
+        body: travailFD,
+    }
+
+    try {
+        fetch("http://localhost:5678/api/works", options)
+    }
+    catch (erreur) {
+        console.error("Erreur lors de l'envoi d'un travail.", erreur)
+    }
 }

@@ -1,4 +1,4 @@
-import { recupererTravaux, insererTravaux, insererFiltres, verifierMode, recupererCategories, insererCategories } from "./travaux.js"
+import { recupererTravaux, insererTravaux, insererFiltres, verifierMode, recupererCategories, insererCategories, envoyerTravail } from "./travaux.js"
 import { insererCartes, ajouterListenerModale, afficherPreviewPhoto } from "./modale.js"
 
 let travaux = []
