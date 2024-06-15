@@ -84,7 +84,6 @@ export function ajouterListenerModale() {
 
     // Ajout des listeners aux inputs et aux submits
     const inputTitre = document.getElementById("titre")
-    console.log(inputTitre)
 
     inputTitre.addEventListener("input", () => {
         verifierFormulaire()
@@ -151,9 +150,7 @@ function verifierFormulaire() {
     const inputTitre = document.getElementById("titre")
     const btnValider = document.getElementById("btn-valider")
 
-    console.log("Vérification du formulaire :", inputPhoto.files, inputTitre.value)
-
-    if (inputPhoto.files != 0 && inputTitre.value != "") {
+    if (inputPhoto.files.length != 0 && inputTitre.value != "") {
         btnValider.disabled = false
         btnValider.classList.remove("desactive")
         btnValider.classList.add("selectionne", "clicable")

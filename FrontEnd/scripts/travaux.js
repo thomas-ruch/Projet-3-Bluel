@@ -1,5 +1,7 @@
 import { insererCartes } from "/scripts/modale.js"
 
+let categories = []
+
 export async function recupererTravaux() {
     let travaux = []
 
@@ -14,16 +16,101 @@ export async function recupererTravaux() {
 }
 
 export async function recupererCategories() {
-    let categories = []
-
     try {
         const reponse = await fetch("http://localhost:5678/api/categories")
-        categories = reponse.json()
+        let cat = await reponse.json()
+        categories = cat
     } catch (erreur) {
         console.error("Erreur lors de la récupération des catégories.", erreur)
     }
+}
 
-    return categories
+function insererTravail(travail) {
+    const galerie = document.querySelector(".gallery")
+
+    console.log("Travail avant insertion : ", travail)
+
+    let figure = document.createElement("figure")
+    figure.dataset.categorie = `${travail.category.name}`
+    figure.dataset.id = `${travail.id}`
+
+    figure.innerHTML += `
+    <img src="${travail.imageUrl}">
+    <figcaption>${travail.title}</figcaption>`
+
+    galerie.appendChild(figure)
+}
+
+function verifierTravail(travail) {
+
+    for (let i = 0; i < categories.length; i++) {
+        if (travail.category === undefined && Number(travail.categoryId) === categories[i].id) {
+            let ajout = {
+                "category": {
+                    "id": categories[i].id,
+                    "name": categories[i].name
+                }
+            }
+            travail = Object.assign( {}, ajout, travail)
+        }
+    }
+
+    return travail
+}
+
+export async function supprimerTravail(tableau, id) {
+    const options = {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
+        },
+    }
+
+    try {
+        await fetch(`http://localhost:5678/api/works/${id}`, options)
+    }
+    catch (erreur) {
+        console.error("Erreur lors de la suppression d'un travail.", erreur)
+    }
+
+    for (let i = 0; i < tableau.length; i++) {
+        if (tableau[i].id === id) {
+            tableau.splice(i, 1)
+        }
+    }
+
+    insererTravaux(tableau)
+    insererFiltres(tableau)
+    insererCartes(tableau)
+
+    return tableau
+}
+
+export async function envoyerTravail(form) {
+    const travailFD = new FormData(form)
+
+    travailFD.delete("image2")
+
+    const options = {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
+        },
+        body: travailFD,
+    }
+
+    try {
+        let reponse = await fetch("http://localhost:5678/api/works", options)
+        let travail = await reponse.json()
+
+        travail = verifierTravail(travail)
+
+        insererTravail(travail)
+    }
+    catch (erreur) {
+        console.error("Erreur lors de l'envoi d'un travail.", erreur)
+    }
+
 }
 
 export function insererTravaux(tableau) {
@@ -32,27 +119,34 @@ export function insererTravaux(tableau) {
     galerie.innerHTML = ""
 
     for (let i = 0; i < tableau.length; i++) {
-        let figure = document.createElement("figure")
-        figure.dataset.categorie = `${tableau[i].category.name}`
-        figure.dataset.id = `${tableau[i].id}`
-
-        figure.innerHTML += `
-        <img src="${tableau[i].imageUrl}" alt="${tableau[i].title}">
-        <figcaption>${tableau[i].title}</figcaption>`
-
-        galerie.appendChild(figure)
+        insererTravail(tableau[i])
     }
 }
 
-export function insererCategories(tableau) {
+function filtrerTravaux(filtre) {
+    //Sélection de tous les travaux de la galerie (<figure>)
+    const figures = document.querySelectorAll(".gallery figure")
 
-    const cat = document.getElementById("catégorie")
+    //Ajout ou retrait de la classe "invisible" selon le filtre en argument
+    for (let i = 0; i < figures.length; i++) {
+        if (filtre != figures[i].dataset.categorie && filtre != "Tous") {
+            figures[i].classList.add("invisible")
+        } else {
+            figures[i].classList.remove("invisible")
+        }
+    }
+}
 
-    for (let i = 0; i < tableau.length; i++) {
+export function insererCategories() {
+
+    console.log(categories)
+    const elemCat = document.getElementById("catégorie")
+
+    for (let i = 0; i < categories.length; i++) {
         let option = document.createElement("option")
-        option.value = `${tableau[i].id}`
-        option.innerHTML = `${tableau[i].name}`
-        cat.appendChild(option)
+        option.value = `${categories[i].id}`
+        option.innerHTML = `${categories[i].name}`
+        elemCat.appendChild(option)
     }
 }
 
@@ -93,32 +187,6 @@ export function insererFiltres(tableau) {
             selectionneBouton(bouton)
         }
     }
-
-}
-
-function selectionneBouton(bouton) {
-    // Désélection de tous les boutons
-    const boutons = document.querySelectorAll(".filtres button")
-    for (let i = 0; i < boutons.length; i++) {
-        boutons[i].classList.remove("selectionne")
-    }
-
-    // Sélection du bouton cliqué
-    bouton.classList.add("selectionne")
-}
-
-function filtrerTravaux(filtre) {
-    //Sélection de tous les travaux de la galerie (<figure>)
-    const figures = document.querySelectorAll(".gallery figure")
-
-    //Ajout ou retrait de la classe "invisible" selon le filtre en argument
-    for (let i = 0; i < figures.length; i++) {
-        if (filtre != figures[i].dataset.categorie && filtre != "Tous") {
-            figures[i].classList.add("invisible")
-        } else {
-            figures[i].classList.remove("invisible")
-        }
-    }
 }
 
 export function verifierMode() {
@@ -138,66 +206,13 @@ export function verifierMode() {
     }
 }
 
-export async function supprimerTravail(tableau, id) {
-    const options = {
-        method: "DELETE",
-        headers: {
-            "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
-        },
+function selectionneBouton(bouton) {
+    // Désélection de tous les boutons
+    const boutons = document.querySelectorAll(".filtres button")
+    for (let i = 0; i < boutons.length; i++) {
+        boutons[i].classList.remove("selectionne")
     }
 
-    try {
-        await fetch(`http://localhost:5678/api/works/${id}`, options)
-    }
-    catch (erreur) {
-        console.error("Erreur lors de la suppression d'un travail.", erreur)
-    }
-
-    console.log("Tableau avant traitement :", tableau)
-
-    for (let i = 0; i < tableau.length; i++) {
-        if (tableau[i].id === id) {
-            tableau.splice(i, 1)
-        }
-    }
-    console.log("Tableau après traitement :", tableau)
-
-    insererTravaux(tableau)
-    insererFiltres(tableau)
-    insererCartes(tableau)
-
-    return tableau
-}
-
-export function envoyerTravail(form) {
-    console.log(form)
-
-    const travailFD = new FormData(form)
-
-    let tabImages = travailFD.getAll("image")
-
-    for (let i = 0; i < tabImages.length; i++) {
-        if (tabImages[i].size === 0) {
-            tabImages.splice(i, 1)
-        }
-    }
-
-    travailFD.delete("image")
-    travailFD.append("image", tabImages[0])
-
-    const options = {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${window.localStorage.getItem("token")}`,
-            "Content-Type": "multipart/form-data",
-        },
-        body: travailFD,
-    }
-
-    try {
-        fetch("http://localhost:5678/api/works", options)
-    }
-    catch (erreur) {
-        console.error("Erreur lors de l'envoi d'un travail.", erreur)
-    }
+    // Sélection du bouton cliqué
+    bouton.classList.add("selectionne")
 }
