@@ -76,6 +76,12 @@ body {
 	background-color: var(--main-bg-color);
 }
 
+main {
+	width: 80%;
+	margin: auto;
+	margin-top: 100px;
+}
+
 section {
 	margin: 50px 0
 }
@@ -121,13 +127,17 @@ a span {
 }
 
 
-/********** Classes utilisées pour les boutons et filtres **********/
+/********** Classes utilisées pour boutons, filtres et éléments cachés **********/
 
 .bouton {
-	padding: 8px 30px;
+	padding: 8px 20px;
 	border-radius: 25px;
 	font-family: 'Syne';
 	font-size: 14px;
+}
+
+.bouton-large {
+	padding: 0 30px;
 }
 
 .classique {
@@ -177,16 +187,18 @@ a span {
 /********** Header et Navigation **********/ 
 
 #edition {
+	width: 100vw;
+	margin: auto;
 	text-align: center;
 	background-color: black;
 	color: white;
-	padding: 20px;
+	padding: 15px 0;
 }
 
 #menu {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0;
+	margin: 30px 0;
 }
 
 nav ul {
@@ -196,8 +208,12 @@ nav ul {
 }
 
 nav li {
-	padding: 0 10px;
+	padding: 0 20px;
 	font-size: 1.2em;
+}
+
+nav img {
+	width: 60%;
 }
 
 li:hover {
@@ -224,8 +240,7 @@ hr {
 
 #introduction img {
 	display: block;
-	margin: auto;
-	width: 80%;
+	width: 85%;
 }
 
 #introduction article {
@@ -246,14 +261,12 @@ hr {
 
 #portfolio .titre {
 	display: flex;
-	margin: auto;
-	justify-content: space-around;
+	justify-content: center;
+	gap: 30px;
 	align-items: baseline;
-	width: 30%;
-	display: flex;
 }
 
-.filtres {
+#filtres {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -261,7 +274,7 @@ hr {
 	gap: 30px;
 }
 
-.gallery {
+#galerie {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -269,7 +282,7 @@ hr {
 	grid-row-gap: 20px;
 }
 
-.gallery img {
+#galerie img {
 	width: 100%;
 }
 
@@ -307,7 +320,7 @@ hr {
 	margin-top: 30px;
 }
 
-#contact input,
+#contact input:not(input[type=submit]),
 #login input:not(input[type=submit]),
 #modale-page2 input:not(input[type=submit]),
 #catégorie {
@@ -377,11 +390,12 @@ input[type="submit"] {
 
 .btn-supprimer {
 	position: absolute;
-	padding: 10px 5px;
+	padding: 8px 4px;
 	top: 5%;
 	right: 5%;
 	background-color: black;
 	color: white;
+	border-radius: 2px;
 }
 
 #btn-valider {
@@ -392,7 +406,7 @@ input[type="submit"] {
 	position: relative;
 }
 
-#photos-modale {
+#cartes {
 	display: flex;
 	padding: 30px 0px 0px;
 	flex-flow: row wrap;
@@ -400,14 +414,15 @@ input[type="submit"] {
 	gap: 5px;
 }
 
-#photos-modale img {
+#cartes img {
 	width: 75px;
 	margin-bottom: 10px;
 }
 
-#ajout-photo label {
+#ajout-photo label,
+#preview-photo label {
 	display: flex;
-	text-align: center;
+	align-items: center;
 	flex-direction: column;
 	background-color: rgb(233,241,246);
 	border-radius: 5px;
@@ -415,6 +430,11 @@ input[type="submit"] {
 	padding: 20px;
 	margin-top: 30px;
 	gap: 10px;
+}
+
+#ajout-photo span {
+	width: 50%;
+	text-align: center;
 }
 
 #ajout-photo i {
@@ -454,5 +474,13 @@ input[type="submit"] {
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em 0;
+}
+
+/********** Largeur d'écran supérieur à 1140px **********/
+
+@media (min-width: 1140px) {
+    #edition {
+		translate: calc((  1140px - 100vw ) / 2);
+	}
 }

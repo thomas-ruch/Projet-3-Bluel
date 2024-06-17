@@ -25,7 +25,6 @@ function envoyerLogin() {
                 window.localStorage.setItem("token", utilisateur.token)
                 window.location.href = "./index.html"
             } else {
-                window.localStorage.removeItem("token")
                 const erreur = document.querySelector(".erreur")
                 erreur.classList.remove("masque")
             }

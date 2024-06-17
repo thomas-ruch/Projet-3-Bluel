@@ -26,9 +26,7 @@ export async function recupererCategories() {
 }
 
 function insererTravail(travail) {
-    const galerie = document.querySelector(".gallery")
-
-    console.log("Travail avant insertion : ", travail)
+    const galerie = document.getElementById("galerie")
 
     let figure = document.createElement("figure")
     figure.dataset.categorie = `${travail.category.name}`
@@ -114,7 +112,7 @@ export async function envoyerTravail(form) {
 }
 
 export function insererTravaux(tableau) {
-    const galerie = document.querySelector(".gallery")
+    const galerie = document.getElementById("galerie")
 
     galerie.innerHTML = ""
 
@@ -125,7 +123,7 @@ export function insererTravaux(tableau) {
 
 function filtrerTravaux(filtre) {
     //Sélection de tous les travaux de la galerie (<figure>)
-    const figures = document.querySelectorAll(".gallery figure")
+    const figures = document.querySelectorAll("#galerie figure")
 
     //Ajout ou retrait de la classe "invisible" selon le filtre en argument
     for (let i = 0; i < figures.length; i++) {
@@ -166,7 +164,7 @@ export function insererFiltres(tableau) {
     categories.splice(0, 0, "Tous")
 
     //Insertion des boutons-filtres dans le code HTML
-    const filtres = document.querySelector(".filtres")
+    const filtres = document.getElementById("filtres")
 
     filtres.innerHTML = ""
 
@@ -191,24 +189,32 @@ export function insererFiltres(tableau) {
 
 export function verifierMode() {
     let token = window.localStorage.getItem("token")
-
-    //Bandeau "édition" est invisible
+    let menuLogin = document.getElementById("login")
     let bandeauEdition = document.getElementById("edition")
-    bandeauEdition.classList.add("invisible")
+    let btnModifier = document.getElementById("btn-modifier")
+    const filtres = document.getElementById("filtres")
 
-    //Si un utilisateur s'est connecté, affichage du bouton de modification
-    //et du bandeau "édition"
+    //Gestion de l'affichage du bandeau "Edition" et du menu login/logout
     if (token != null) {
-        let btnModifier = document.getElementById("btn-modifier")
-
         bandeauEdition.classList.remove("invisible")
         btnModifier.classList.remove("invisible")
+        menuLogin.href="index.html"
+        menuLogin.innerText="logout"
+        menuLogin.addEventListener("click", () => {
+            window.localStorage.removeItem("token")
+        })
+        filtres.classList.add("masque")
+    }
+    else {
+        bandeauEdition.classList.add("invisible")
+        menuLogin.href="login.html"
+        menuLogin.innerText="login"
     }
 }
 
 function selectionneBouton(bouton) {
     // Désélection de tous les boutons
-    const boutons = document.querySelectorAll(".filtres button")
+    const boutons = document.querySelectorAll("#filtres button")
     for (let i = 0; i < boutons.length; i++) {
         boutons[i].classList.remove("selectionne")
     }

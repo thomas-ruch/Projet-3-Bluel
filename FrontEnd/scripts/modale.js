@@ -21,7 +21,7 @@ function cacherModale() {
 }
 
 export function insererCartes(tableau) {
-    const photosModale = document.getElementById("photos-modale")
+    const photosModale = document.getElementById("cartes")
 
     photosModale.innerHTML = ""
 
@@ -33,7 +33,7 @@ export function insererCartes(tableau) {
         divImage.classList.add("carte")
         poubelle.classList.add("btn-supprimer", "clicable", "fa-solid", "fa-trash-can", "fa-xs")
 
-        poubelle.addEventListener("click", (event) => {
+        poubelle.addEventListener("click", () => {
             supprimerTravail(tableau, tableau[i].id)
         })
 
