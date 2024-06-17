@@ -12,7 +12,7 @@ function afficherModale() {
     reinitialiserFormulaire()
 }
 
-function cacherModale() {
+export function cacherModale() {
     const bckgrdModale = document.getElementById("background-modale")
     const modaleP2 = document.getElementById("modale-page2")
 
@@ -26,23 +26,40 @@ export function insererCartes(tableau) {
     photosModale.innerHTML = ""
 
     for (let i = 0; i < tableau.length; i++) {
-        let divImage = document.createElement("div")
-        let image = document.createElement("img")
-        let poubelle = document.createElement("i")
+        insererCarte(tableau[i])
+    }
+}
 
-        divImage.classList.add("carte")
-        poubelle.classList.add("btn-supprimer", "clicable", "fa-solid", "fa-trash-can", "fa-xs")
+export function insererCarte(travail) {
+    const photosModale = document.getElementById("cartes")
+    let divImage = document.createElement("div")
+    let image = document.createElement("img")
+    const poubelle = document.createElement("i")
 
-        poubelle.addEventListener("click", () => {
-            supprimerTravail(tableau, tableau[i].id)
-        })
+    divImage.classList.add("carte")
+    poubelle.classList.add("btn-supprimer", "cliquable", "fa-solid", "fa-trash-can", "fa-xs")
 
-        image.src = `${tableau[i].imageUrl}`
-        image.alt = `${tableau[i].title}`
+    poubelle.addEventListener("click", () => {
+        supprimerTravail(travail.id)
+    })
 
-        divImage.appendChild(poubelle)
-        divImage.appendChild(image)
-        photosModale.appendChild(divImage)
+    image.src = `${travail.imageUrl}`
+    image.alt = `${travail.title}`
+    divImage.dataset.id = travail.id
+
+    divImage.appendChild(poubelle)
+    divImage.appendChild(image)
+    photosModale.appendChild(divImage)
+}
+
+export function supprimerCarte(id) {
+    const divCartes = document.getElementById("cartes")
+    const cartes = document.querySelectorAll("#cartes .carte")
+
+    for (let i = 0; i < cartes.length; i++) {
+        if (Number(cartes[i].dataset.id) === id) {
+            divCartes.removeChild(cartes[i])
+        }
     }
 }
 
@@ -106,14 +123,13 @@ export function afficherPreviewPhoto() {
     const imgPreviewPhoto = document.querySelector("#preview-photo img")
 
     inputPhoto.addEventListener("change", () => {
-        let fichiers = inputPhoto.files
+        const fichiers = inputPhoto.files
 
         if (fichiers.length > 0 && verifierFichier(fichiers[0])) {
             imgPreviewPhoto.src = window.URL.createObjectURL(fichiers[0])
             previewPhoto.classList.remove("invisible")
             ajoutPhoto.classList.add("invisible")
         }
-
         verifierFormulaire()
     })
 }
@@ -153,9 +169,9 @@ function verifierFormulaire() {
     if (inputPhoto.files.length != 0 && inputTitre.value != "") {
         btnValider.disabled = false
         btnValider.classList.remove("desactive")
-        btnValider.classList.add("selectionne", "clicable")
+        btnValider.classList.add("selectionne", "cliquable")
     } else {
         btnValider.classList.add("desactive")
-        btnValider.classList.remove("selectionne", "clicable")
+        btnValider.classList.remove("selectionne", "cliquable")
     }
 }

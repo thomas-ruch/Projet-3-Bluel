@@ -1,4 +1,4 @@
-import { insererCartes } from "/scripts/modale.js"
+import { insererCarte, supprimerCarte, cacherModale } from "/scripts/modale.js"
 
 let categories = []
 
@@ -40,23 +40,23 @@ function insererTravail(travail) {
 }
 
 function verifierTravail(travail) {
+    let travailComplete = {}
 
     for (let i = 0; i < categories.length; i++) {
         if (travail.category === undefined && Number(travail.categoryId) === categories[i].id) {
-            let ajout = {
+            const ajout = {
                 "category": {
                     "id": categories[i].id,
                     "name": categories[i].name
                 }
             }
-            travail = Object.assign( {}, ajout, travail)
+            travailComplete = Object.assign({}, ajout, travail)
         }
     }
-
-    return travail
+    return travailComplete
 }
 
-export async function supprimerTravail(tableau, id) {
+export async function supprimerTravail(id) {
     const options = {
         method: "DELETE",
         headers: {
@@ -71,17 +71,16 @@ export async function supprimerTravail(tableau, id) {
         console.error("Erreur lors de la suppression d'un travail.", erreur)
     }
 
-    for (let i = 0; i < tableau.length; i++) {
-        if (tableau[i].id === id) {
-            tableau.splice(i, 1)
+    const galerie = document.getElementById("galerie")
+    const figures = document.querySelectorAll("#galerie figure")
+
+    for (let i = 0; i < figures.length; i++) {
+        console.log(`figures[${i}].dataset.id : `, figures[i].dataset.id, " / id : ", id)
+        if (Number(figures[i].dataset.id) === id) {
+            galerie.removeChild(figures[i])
         }
     }
-
-    insererTravaux(tableau)
-    insererFiltres(tableau)
-    insererCartes(tableau)
-
-    return tableau
+    supprimerCarte(id)
 }
 
 export async function envoyerTravail(form) {
@@ -98,17 +97,18 @@ export async function envoyerTravail(form) {
     }
 
     try {
-        let reponse = await fetch("http://localhost:5678/api/works", options)
+        const reponse = await fetch("http://localhost:5678/api/works", options)
         let travail = await reponse.json()
 
         travail = verifierTravail(travail)
 
         insererTravail(travail)
+        insererCarte(travail)
+        cacherModale()
     }
     catch (erreur) {
         console.error("Erreur lors de l'envoi d'un travail.", erreur)
     }
-
 }
 
 export function insererTravaux(tableau) {
@@ -136,8 +136,6 @@ function filtrerTravaux(filtre) {
 }
 
 export function insererCategories() {
-
-    console.log(categories)
     const elemCat = document.getElementById("catégorie")
 
     for (let i = 0; i < categories.length; i++) {
@@ -171,7 +169,7 @@ export function insererFiltres(tableau) {
     for (let i = 0; i < categories.length; i++) {
         let bouton = document.createElement("button")
         bouton.textContent = `${categories[i]}`
-        bouton.classList.add("bouton", "classique", "clicable")
+        bouton.classList.add("bouton", "classique", "cliquable")
 
         filtres.appendChild(bouton)
 
@@ -188,18 +186,18 @@ export function insererFiltres(tableau) {
 }
 
 export function verifierMode() {
-    let token = window.localStorage.getItem("token")
-    let menuLogin = document.getElementById("login")
-    let bandeauEdition = document.getElementById("edition")
-    let btnModifier = document.getElementById("btn-modifier")
+    const token = window.localStorage.getItem("token")
+    const menuLogin = document.getElementById("login")
+    const bandeauEdition = document.getElementById("edition")
+    const btnModifier = document.getElementById("btn-modifier")
     const filtres = document.getElementById("filtres")
 
     //Gestion de l'affichage du bandeau "Edition" et du menu login/logout
     if (token != null) {
         bandeauEdition.classList.remove("invisible")
         btnModifier.classList.remove("invisible")
-        menuLogin.href="index.html"
-        menuLogin.innerText="logout"
+        menuLogin.href = "index.html"
+        menuLogin.innerText = "logout"
         menuLogin.addEventListener("click", () => {
             window.localStorage.removeItem("token")
         })
@@ -207,8 +205,8 @@ export function verifierMode() {
     }
     else {
         bandeauEdition.classList.add("invisible")
-        menuLogin.href="login.html"
-        menuLogin.innerText="login"
+        menuLogin.href = "login.html"
+        menuLogin.innerText = "login"
     }
 }
 
