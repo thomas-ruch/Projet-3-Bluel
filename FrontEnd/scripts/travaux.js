@@ -33,7 +33,7 @@ function insererTravail(travail) {
     figure.dataset.id = `${travail.id}`
 
     figure.innerHTML += `
-    <img src="${travail.imageUrl}">
+    <img src="${travail.imageUrl}" alt=\`photo de ${travail.title}\`>
     <figcaption>${travail.title}</figcaption>`
 
     galerie.appendChild(figure)

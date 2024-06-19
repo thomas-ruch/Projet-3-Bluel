@@ -12,8 +12,8 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/45c0cb7e2a.js" crossorigin="anonymous"></script>
-	<script src="scripts/main.js" type="module" defer></script>
-	<script src="scripts/modale.js" type="module" defer></script>
+	<script src="scripts/main.js" type="module"></script>
+	<script src="scripts/modale.js" type="module"></script>
 </head>
 
 <body>
@@ -106,13 +106,13 @@
 						<i class="fa-regular fa-image fa-6x"></i>
 						<span class="bouton indicatif">+ Ajouter photo</span>
 						<input type="file" id="photo" name="image" accept="image/jpg, image/png">
-						<p>jpg, png : 4 mo max</p>
+						<span>jpg, png : 4 mo max</span>
 					</label>
 				</div>
 				<div id="preview-photo" class="invisible">
-					<label for="photo" class="cliquable">
-						<input type="file" id="photo" name="image2" accept="image/jpg, image/png">
-						<img src="#">
+					<label for="photo2" class="cliquable">
+						<input type="file" id="photo2" name="image2" accept="image/jpg, image/png">
+						<img src="#" alt="preview de la photo à ajouter">
 					</label>
 				</div>
 				<label for="titre">Titre</label>
@@ -120,7 +120,7 @@
 				<label for="catégorie">Catégorie</label>
 				<select id="catégorie" name="category"></select>
 				<hr>
-				<input type="submit" id="btn-valider" value="Valider" disabled=true class="bouton desactive cliquable">
+				<input type="submit" id="btn-valider" value="Valider" disabled class="bouton desactive cliquable">
 			</form>
 		</div>
 	</div>

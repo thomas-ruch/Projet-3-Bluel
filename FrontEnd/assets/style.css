@@ -171,7 +171,7 @@ form {
 .indicatif {
 	font-family: 'Work sans';
 	border: solid 1px #CCD6DC;
-	color: #3A6784;
+	color: #306685;
 	background-color: #CCD6DC;
 }
 
@@ -231,7 +231,7 @@ li:hover {
 }
 
 hr {
-  	color: var(--disable-color);
+  	color: #B3B3B3;
 	margin: 40px 0px;
 	width: 100%;
 }
@@ -284,6 +284,7 @@ hr {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
+	margin-bottom: 70px;
 }
 
 #galerie img {
@@ -421,17 +422,21 @@ input[type="submit"] {
 	gap: 10px;
 }
 
-#ajout-photo span {
+#ajout-photo .bouton {
 	width: 50%;
 	text-align: center;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	font-weight: 500;
 }
 
 #ajout-photo i {
 	margin: 10px;
+	color: #B9C5CC;
 }
 
-#ajout-photo p {
-	color: black;
+#ajout-photo span {
+	color: #444444;
 	font-size: 12px;
 }
 
@@ -446,6 +451,7 @@ input[type="submit"] {
 
 #catégorie {
 	appearance: none;
+	background-color: white;
 }
 
 #modale-page2 input[type=file] {
@@ -464,6 +470,6 @@ footer nav ul {
 
 @media (min-width: 1140px) {
     #edition {
-		translate: calc((  1140px - 100vw ) / 2);
+		translate: calc( (  1140px - 100vw ) / 2);
 	}
 }

@@ -117,8 +117,9 @@ export function ajouterListenerModale() {
 
 export function afficherPreviewPhoto() {
 
-    const inputPhoto = document.querySelector("#ajout-photo input")
+    const inputPhoto = document.getElementById("photo")
     const ajoutPhoto = document.getElementById("ajout-photo")
+    const inputPhoto2 = document.getElementById("photo2")
     const previewPhoto = document.getElementById("preview-photo")
     const imgPreviewPhoto = document.querySelector("#preview-photo img")
 
@@ -129,6 +130,15 @@ export function afficherPreviewPhoto() {
             imgPreviewPhoto.src = window.URL.createObjectURL(fichiers[0])
             previewPhoto.classList.remove("invisible")
             ajoutPhoto.classList.add("invisible")
+        }
+        verifierFormulaire()
+    })
+
+    inputPhoto2.addEventListener("change", () => {
+        const fichiers = inputPhoto2.files
+
+        if (fichiers.length > 0 && verifierFichier(fichiers[0])) {
+            imgPreviewPhoto.src = window.URL.createObjectURL(fichiers[0])
         }
         verifierFormulaire()
     })
@@ -167,7 +177,7 @@ function verifierFormulaire() {
     const btnValider = document.getElementById("btn-valider")
 
     if (inputPhoto.files.length != 0 && inputTitre.value != "") {
-        btnValider.disabled = false
+        btnValider.removeAttribute("disabled")
         btnValider.classList.remove("desactive")
         btnValider.classList.add("selectionne", "cliquable")
     } else {
