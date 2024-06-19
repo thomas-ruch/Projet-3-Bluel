@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
 			return res.status(400).json({error: new Error("Bad Request")})
 		}
 	}catch(e){
-		return res.status(501).json({error: new Error("Something wrong occured")})
+		return res.status(500).json({error: new Error("Something wrong occured")})
 	}
 
 }
